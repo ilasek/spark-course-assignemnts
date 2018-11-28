@@ -1,0 +1,155 @@
+{
+  "paragraphs": [
+    {
+      "text": "%dep\nz.reset()\nz.load(\"com.databricks:spark-avro_2.11:4.0.0\")",
+      "user": "anonymous",
+      "dateUpdated": "Nov 28, 2018 8:01:18 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "res0: org.apache.zeppelin.dep.Dependency \u003d org.apache.zeppelin.dep.Dependency@658219d0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1540912590070_-1010839775",
+      "id": "20181030-151630_278529290",
+      "dateCreated": "Oct 30, 2018 3:16:30 PM",
+      "dateStarted": "Nov 28, 2018 8:01:18 PM",
+      "dateFinished": "Nov 28, 2018 8:02:19 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n## Unique trending videos\nI\u0027m ommitting tags and description from ```trendingUniqueVideos``` because they are changing during the course of the time and their change can cause some videos to appear multiple times in the results.",
+      "user": "anonymous",
+      "dateUpdated": "Nov 17, 2018 6:31:48 AM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eUnique trending videos\u003c/h2\u003e\n\u003cp\u003eI\u0026rsquo;m ommitting tags and description from \u003ccode\u003etrendingUniqueVideos\u003c/code\u003e because they are changing during the course of the time and their change can cause some videos to appear multiple times in the results.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1541835567864_636424612",
+      "id": "20181110-073927_1040092073",
+      "dateCreated": "Nov 10, 2018 7:39:27 AM",
+      "dateStarted": "Nov 17, 2018 6:31:48 AM",
+      "dateFinished": "Nov 17, 2018 6:31:50 AM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "val videos \u003d spark.read.parquet(\"/data/USVideos.parquet\");\nval tags \u003d spark.read.format(\"com.databricks.spark.avro\").load(\"/data/Tags.avro\");\nvideos.createOrReplaceTempView(\"videos\")\ntags.createOrReplaceTempView(\"tags\")\n",
+      "user": "anonymous",
+      "dateUpdated": "Nov 28, 2018 8:03:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/text"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "videos: org.apache.spark.sql.DataFrame \u003d [video_id: string, trending_date: string ... 14 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1540911810267_1088831851",
+      "id": "20181030-150330_1965937861",
+      "dateCreated": "Oct 30, 2018 3:03:30 PM",
+      "dateStarted": "Nov 28, 2018 8:03:25 PM",
+      "dateFinished": "Nov 28, 2018 8:03:26 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "Nov 17, 2018 6:42:36 AM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1542436956655_1673378003",
+      "id": "20181117-064236_33740523",
+      "dateCreated": "Nov 17, 2018 6:42:36 AM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Youtube Videos",
+  "id": "2DUWBC4KV",
+  "angularObjects": {
+    "2DXD6YKYV:shared_process": [],
+    "2DZ9BEQHY:shared_process": [],
+    "2DW5N14CK:shared_process": [],
+    "2DY8CFWKH:shared_process": [],
+    "2DX35ECQW:shared_process": [],
+    "2DWE5T7G5:shared_process": [],
+    "2DYKPH9HE:shared_process": [],
+    "2DWJ2S5GX:shared_process": [],
+    "2DVJ1RC5W:shared_process": [],
+    "2DY329ZU9:shared_process": [],
+    "2DVYGV4QQ:shared_process": [],
+    "2DY7PKUSN:shared_process": [],
+    "2DW2PFJEH:shared_process": [],
+    "2DZCJHYE9:shared_process": [],
+    "2DVUX45Y7:shared_process": [],
+    "2DXVVTTZ3:shared_process": [],
+    "2DX6H4UDS:shared_process": [],
+    "2DXVAQE9U:shared_process": [],
+    "2DVRM28M9:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}
