@@ -20,7 +20,8 @@ import scala.collection.immutable.Map;
 public class ObscureDataFormat implements RelationProvider, SchemaRelationProvider, CreatableRelationProvider {
     @Override
     public BaseRelation createRelation(SQLContext sqlContext, SaveMode mode, Map<String, String> parameters, Dataset<Row> data) {
-        // Your asserts come here...
+        // Your code comes here...
+//        assertEquals("There is a correct number of records persisted", ...);
 
         return null;
     }

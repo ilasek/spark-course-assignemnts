@@ -1,12 +1,11 @@
 package com.ivolasek.sparkcourse.wordcount;
 
-import java.util.List;
-
 import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.sql.SparkSession;
-
 import scala.Tuple2;
 
+import java.util.List;
 
 /**
  * Computes number of severities of log messages in data/sample.log file.
@@ -24,7 +23,9 @@ public class LogAnalysis {
 
         JavaRDD<String> logFile = spark.read().textFile("spark-introduction/data/sample.log").javaRDD();
 
-        // Enter your code here...
+//        List<Tuple2<String, Integer>> counts = logFile
+//                .... Your code comes here....
+//                .collect();
 
 //        System.out.println(counts);
     }

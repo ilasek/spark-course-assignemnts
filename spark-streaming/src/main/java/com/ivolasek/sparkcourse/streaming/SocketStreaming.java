@@ -1,15 +1,22 @@
 package com.ivolasek.sparkcourse.streaming;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
 
+import org.apache.spark.api.java.function.MapFunction;
 import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.streaming.StreamingQuery;
 import org.apache.spark.sql.streaming.StreamingQueryException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
- * <p>This sample code demonstrates Spark streaming capabilities by performing a sentiment analysis on a live stream of
- * tweets containing a word sick.</p>
+ * <p>This sample code demonstrates Spark streaming capabilities by reading data from a socket simulating a Twitter api
+ * and sending them to a Kafka sink.</p>
  */
 public class SocketStreaming {
 
@@ -30,8 +37,17 @@ public class SocketStreaming {
                 .option("port", 9999)
                 .load();
 
+        Dataset<String> tweets = lines.as(Encoders.STRING());
+        // Your code comes here....
+        // Create a JSON representation of the Tweet object and send it to Kafka.
+
+
         // Your code comes here...
-        // Use the Tweet class to encode Tweets in JSON (add the current timestamp to it as a createdDate.
-        // Send the JSON encoded tweets to Kafka to a topic tweets.
+        // Instead of writing to the console, send data directly to Kafka - to the topic tweets.
+        StreamingQuery query = tweets.writeStream()
+                .format("console")
+                .start();
+
+        query.awaitTermination();
     }
 }

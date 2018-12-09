@@ -4,19 +4,17 @@
  */
 package com.ivolasek.sparkcourse.streaming;
 
-import static org.apache.spark.sql.functions.expr;
-
-import org.apache.spark.api.java.function.MapFunction;
 import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Encoders;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.StreamingQuery;
 import org.apache.spark.sql.streaming.StreamingQueryException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+/**
+ * This class represents a Spark streaming job computing sentiment analysis for each incoming tweet. Results are
+ * printed to the console.
+ */
 public class SentimentAnalysis {
 
     public static void main(String[] args) throws StreamingQueryException {
@@ -24,7 +22,12 @@ public class SentimentAnalysis {
                 .master("local[*]")
                 .getOrCreate();
 
-        // You can use the sentiment static dataset to join it with the stream
+        Dataset<Row> tweets = spark.readStream()
+                .format("kafka")
+                .option("kafka.bootstrap.servers", "localhost:9092")
+                .option("subscribe", "tweets")
+                .load();
+
         // Load sentiment dataset
         String[] schema = {"word", "sentiment"};
         Dataset<Row> sentiments = spark.read()
@@ -33,11 +36,19 @@ public class SentimentAnalysis {
                 .option("inferSchema", "true")
                 .csv("spark-streaming/data/sentiment.tsv")
                 .toDF(schema);
-        sentiments.registerTempTable("sentiments");
+        sentiments.createOrReplaceTempView("sentiments");
 
-        // Your code comes here....
-        // Read data from the tweets topic, compute the sentiment for each tweet and print it to console
+        StreamingQuery query = tweets
+                // Your code comes here...
+                // Join streaming dataset tweets with the static dataset sentiments and compute a sentiment score
+                // for each incoming tweet as a SUM of all words from the tweet found in the sentiment dataset.
 
-        // Print incoming tweets together with their sentiment score
+                .writeStream()
+                .outputMode("update")
+                .option("truncate", false)
+                .format("console")
+                .start();
+
+        query.awaitTermination();
     }
 }
